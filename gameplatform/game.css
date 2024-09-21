@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+body{
+    background-color: #00b4b3 !important;
+}
+
+.border-answer{
+border: 1px soild black !important;
+}
+
+
+.in-bottom {
+position: absolute;
+box-shadow:5px 10px 8px #00663f;
+
+}
+
+.post-re{
+    position: relative;
+}
+
+.player-bg{
+    box-shadow:5px 10px 8px #00663f;
+background-color: aliceblue;
+}
+
+ .btn:hover{
+background-color: #00b4b3 !important;
+}
