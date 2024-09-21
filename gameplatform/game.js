@@ -1,39 +1,22 @@
+let ullist = document.getElementById("ul-list")
+// liplayer.setAttribute("class","nav-item")
 let namee=document.getElementById("show-name")
 
-let username = localStorage.getItem('username')
+let username =JSON.parse(localStorage.getItem('players')) || []
+console.log(username);
+username.forEach(element => {
+    console.log(element);
+    let liplayer=document.createElement("li")
+liplayer.textContent=element
+ullist.appendChild(liplayer)
 
-namee.textContent=username
-
-
-
-
-    // let question_content =document.getElementById("qus-content")
-
-// let div_row = document.createElement("div")
-// div_row.setAttribute("class","row justify-content-around card-body")
-// div_row.setAttribute("class","row")
-// question.setAttribute("class","text-center")
-
-//     let div_row1 = document.createElement("div")
-//     div_row.setAttribute("class","row justify-content-around card-body")
-//     let button_1=document.createElement("button")
-//     button_1.setAttribute("class","col-4 border btn border-dark")
-//     // let button_2=document.createElement("button")
-//     // button_1.setAttribute("class","col-4 border btn border-dark")
-//     // let div_row2 = document.createElement("div")
-//     // div_row.setAttribute("class","row justify-content-around card-body")
-     
-// question_content.appendChild(div_row)
-// question_content.appendChild(div_row1)
-// div_row.appendChild(question_1)
-// div_row1.appendChild(button_1)
-
-//     question.map(q=>{
-//         question_1.textContent=q.qus
-//         // button_1.textContent=q.opstion
+});
+// namee.textContent=username
 
 
-// })
+
+
+    
 let question_1 =document.getElementById("qustion-1")
 
 
@@ -94,7 +77,7 @@ setTimeout(()=>{
         nextQustion()
     }else{
         alert("finish")
-        window.location.href=""
+        window.location.href="../winner/winnerpage.html"
     }
    
 } , 1000)
