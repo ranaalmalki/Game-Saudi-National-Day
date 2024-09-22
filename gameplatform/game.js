@@ -1,14 +1,26 @@
-let ullist = document.getElementById("ul-list")
+// let ullist = document.createElement("ul")
+let players_name_score = document.getElementById("players-name-score")
 // liplayer.setAttribute("class","nav-item")
 let namee=document.getElementById("show-name")
 
 let username =JSON.parse(localStorage.getItem('players')) || []
 console.log(username);
+
+let plyerscore={}
 username.forEach(element => {
     console.log(element);
-    let liplayer=document.createElement("li")
-liplayer.textContent=element
-ullist.appendChild(liplayer)
+    let divplayer=document.createElement("div")
+    divplayer.setAttribute("class","divplyer")
+    let playername = document.createElement("h3")
+    playername.textContent=element
+    plyerscore[element]=0;
+    let scoreplayer= document.createElement("h6")
+    scoreplayer.setAttribute("id", `score-${element}`); // تعيين معرف فريد للنقاط
+    scoreplayer.textContent=`${plyerscore[element]}النقاط:`
+// ullist.appendChild(liplayer)
+players_name_score.appendChild(divplayer)
+divplayer.appendChild(playername)
+divplayer.appendChild(scoreplayer)
 
 });
 // namee.textContent=username
@@ -28,7 +40,7 @@ let btn_4=document.getElementById("btn-4");
 
 let question =[
     {
-       qus:" متى تم توحيد المملكة العربية السعودية يوم؟",
+       qus:" متى تم توحيد المملكة العربية السعودية ؟",
        opstion:["23 سبتمبر","24 سبتمبر","25 سبتمير","22 سبتمبر"],
        answer:0,
    },
@@ -38,10 +50,25 @@ let question =[
        answer:0,
    },
    {
-       qus:"ما هو اللون الوطني للمملكة؟",
+       qus:"ما هو اللون الأساسي في علم المملكة العربية السعودية؟",
        opstion:["الأخضر", "الأحمر", "الأزرق", "الأصفر"],
        answer:0,
    },
+   {
+    qus:"من هو مؤسس المملكة العربية السعودية؟",
+    opstion:["الملك عبد العزيز آل سعود","الملك سعود بن عبد العزيز","الملك فيصل بن عبد العزيز","الملك خالد بن عبد العزيز"],
+    answer:0,
+},
+{
+    qus: "ما هو اسم العلم السعودي؟",
+    opstion: ["علم الإخاء", "علم الوحدة", "علم السلام", "علم التوحيد"],
+    answer: 3,
+},
+{
+    qus:"في أي عام تم تأسيس المملكة العربية السعودية؟",
+    opstion:["1932", "1925", "1945", "1950"],
+    answer:0,
+},
    ]
    
 
@@ -62,12 +89,23 @@ let answerd= false;
 function answerCorrect(isCorrect){
     if(!answerd){
         answerd=true
+        let current = username[0]
     if(isCorrect){
         score+=100;
-score_player.textContent=`النقاط:${score}`
-alert("good")
+        plyerscore[current]+=100
+document.getElementById(`score-${current}`).textContent=`النقاط:${plyerscore[current]}`
+Swal.fire({
+    title: "حركات صح عليك ",
+    text: "كسبت 100 ",
+    icon: "success"
+  });
+// alert("good")
     }else{
-        alert("غجاية خاطئة")
+        Swal.fire({
+            title: "إجابة خاطئة",
+            text: "راحت عليك ",
+            icon: "error"
+          });
     }
 
 

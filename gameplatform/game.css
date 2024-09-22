@@ -31,3 +31,19 @@ background-color: aliceblue;
  .btn:hover{
 background-color: #00b4b3 !important;
 }
+
+.players-name-score {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px;
+}
+
+.divplyer{
+    background-color: white;
+    border:  1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgb(0, 0, 0);
+}
