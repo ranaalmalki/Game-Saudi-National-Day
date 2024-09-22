@@ -115,6 +115,7 @@ setTimeout(()=>{
         nextQustion()
     }else{
         alert("finish")
+        localStorage.setItem('playersScores', JSON.stringify(plyerscore));
         window.location.href="../winner/winnerpage.html"
     }
    
