@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:'Courier New', Courier, monospace
 }
 
 body{
@@ -11,11 +12,14 @@ body{
     min-height:100vh ;
     background-color: #6bcac8 !important;
 }
+
+
 .contentt-cube{
     display: flex;
     row-gap: 90px;
     flex-direction: column;
     align-items: center;  
+
 }
 .cube{
     position: relative;
@@ -23,7 +27,7 @@ body{
     height: 300px;
     transform-style: preserve-3d;
     transform: rotateX(-30deg);
-    animation: animate 4s linear infinite;
+    animation: animate 6s linear infinite;
 }
 @keyframes animate{
     0%
@@ -164,8 +168,8 @@ z-index: 3;
     z-index: 1;
     transform: scaleX(-1);
 }
-/* 
-.garden{
+
+/* .garden{
     background: url("/Game-Saudi-National-Day/image-homepage/Kings-garden.webp") center bottom no-repeat;
     background-size: contain;
     position: absolute;
@@ -174,7 +178,7 @@ z-index: 3;
     height: 30%;
     left: 9%;
     z-index: 2;
-} */
+}  */
 
 /* .mountain-1{
     background: url("/Game-Saudi-National-Day/image-homepage/mountain-1.webp") center bottom no-repeat;
@@ -205,7 +209,7 @@ z-index: 3;
     position: absolute;
     bottom: 22%;
     width: 28%;
-    height: 50%;
+    height: 30%;
     right: 10%;
     z-index: 1;
 
@@ -217,7 +221,7 @@ z-index: 3;
     position: absolute;
     bottom: 20%;
     width: 28%;
-    height: 50%;
+    height: 40%;
     right: 3%;
 
 }
@@ -250,7 +254,7 @@ z-index: 3;
     background: url("/Game-Saudi-National-Day/image-homepage/sun.webp") center bottom no-repeat;
     background-size: contain;
     position: absolute;
-    bottom: 60%;
+    bottom: 66%;
     width: 20%;
     height: 20%;
     right: 18%;
@@ -266,4 +270,29 @@ z-index: 3;
     height: 50%;
     right: 14%;
 z-index: 0;
+}
+
+/* */
+.none-img{
+    display: none;
+}
+@media only screen and (max-width: 600px) {
+    body {
+
+        flex-direction: column;
+        align-items: center; 
+        background: url("/Game-Saudi-National-Day/gameplatform/ND94-LOGO-STACKED-WHITE.png") ;
+    }
+    .none-img{
+      
+        display: block;
+        width: 100%;
+        height:auto;
+    }
+
+    .contentt-cube, .theline, .road, .energy, .women, .man, .ola, .Diriyah-1, .Diriyah-2, .sea, .Sindala, .sun, .palm {
+        width: 90%; 
+        height: auto; 
+        position: relative; 
+    }
 }
