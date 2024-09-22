@@ -6,6 +6,7 @@
 }
 body{
     background-color: #00b4b3 !important;
+    
 }
 
 .border-answer{
@@ -36,6 +37,8 @@ background-color: #00b4b3 !important;
     display: flex !important;
     flex-wrap: wrap !important;
     gap: 10px;
+    justify-content: center !important; /* لتوسيع العناصر في الوسط أفقيًا */
+    align-items: center !important;
 }
 
 .divplyer{
@@ -46,4 +49,5 @@ background-color: #00b4b3 !important;
     width: 150px;
     text-align: center;
     box-shadow: 2px 2px 5px rgb(0, 0, 0);
+  
 }

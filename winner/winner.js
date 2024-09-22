@@ -18,7 +18,8 @@ const list_winner = document.getElementById("list-winner");
 // عرض النتائج لكل اللاعبين
 Object.entries(playersScores).forEach(([player, score]) => {
     let list_name = document.createElement("li");
-    list_name.textContent = `${player}: ${score} النقاط`;
+    list_name.setAttribute("class","list-w")
+    list_name.textContent = `${player} :${score} `;
     list_winner.appendChild(list_name);
 });
 // let plyerscore={}
