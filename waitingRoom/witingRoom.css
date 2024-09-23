@@ -1,0 +1,66 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+body{
+    background-color: #00b4b3 !important;
+}
+
+.border-answer{
+border: 1px soild black !important;
+}
+
+
+.in-bottom {
+position: absolute;
+box-shadow:5px 10px 8px #00663f;
+
+}
+
+.post-re{
+    position: relative;
+}
+
+/* .player-bg{
+    box-shadow:5px 10px 8px #00663f;
+background-color: aliceblue;
+width: 50% !important;
+} */
+ 
+
+ .btn:hover{
+background-color: #00b4b3 !important;
+}
+
+.women{
+    background: url("/Game-Saudi-National-Day/image-homepage/women.webp") center bottom no-repeat;
+    background-size: contain;
+    position: absolute;
+    bottom: -3%;
+    width: 30%;
+    height: 50%;
+    left: -9%;
+    z-index: 1;
+}
+.man{
+    background: url("/Game-Saudi-National-Day/image-homepage/man.webp") center bottom no-repeat;
+    background-size: contain;
+    position: absolute;
+    bottom: -3%;
+    width: 30%;
+    height: 50%;
+    right: -7%;
+    z-index: 1;
+}
+
+.list-w{
+    list-style: none;
+    font-size: 30px;
+}
+
+.style-h{
+    background-color: #154760;
+    color: white;
+}
