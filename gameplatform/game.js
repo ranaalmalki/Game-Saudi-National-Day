@@ -3,20 +3,23 @@ let players_name_score = document.getElementById("players-name-score")
 // liplayer.setAttribute("class","nav-item")
 let namee=document.getElementById("show-name")
 
-let username =JSON.parse(localStorage.getItem('players')) || []
-console.log(username);
+// let username =JSON.parse(localStorage.getItem('players')) || []
+let username = fetch("https://66e7e69bb17821a9d9da6eb2.mockapi.io/login")
+.then(res=>res.json())
+.then(plyers=>{
+console.log(plyers);
 
 let plyerscore={}
-username.forEach(element => {
-    console.log(element);
+plyers.forEach(element => {
+    console.log(element.name);
     let divplayer=document.createElement("div")
     divplayer.setAttribute("class","divplyer")
     let playername = document.createElement("h3")
-    playername.textContent=element
+    playername.textContent=element.name
     plyerscore[element]=0;
     let scoreplayer= document.createElement("h6")
-    scoreplayer.setAttribute("id", `score-${element}`); // تعيين معرف فريد للنقاط
-    scoreplayer.textContent=`${plyerscore[element]}النقاط:`
+    scoreplayer.setAttribute("id", `score-${element.name}`); // تعيين معرف فريد للنقاط
+    scoreplayer.textContent=`${plyerscore[element.name]}النقاط:`
 // ullist.appendChild(liplayer)
 players_name_score.appendChild(divplayer)
 divplayer.appendChild(playername)
@@ -24,7 +27,7 @@ divplayer.appendChild(scoreplayer)
 
 });
 // namee.textContent=username
-
+})
 
 
 
@@ -74,6 +77,7 @@ let question =[
 
 let currentqu = 0;
 function nextQustion(){
+    if(currentqu <question.length){
     let currentqution = question[currentqu];
     question_1.textContent=currentqution.qus
     btn_1.textContent = currentqution.opstion[0];
@@ -81,25 +85,31 @@ function nextQustion(){
     btn_3.textContent = currentqution.opstion[2];
     btn_4.textContent = currentqution.opstion[3];
     answerd = false; 
+}else{
+    alert("انتهت")
+         localStorage.setItem('playersScores', JSON.stringify(plyerscore));
+        window.location.href="../winner/winnerpage.html"
+}
 }
 
-
 let score = 0;
+let currentindex=0
 let answerd= false;
-function answerCorrect(isCorrect){
-    if(!answerd){
-        answerd=true
-        let current = username[0]
+function answerCorrect(isCorrect,playername){
+    // if(!answerd){
+        // answerd=true
+        // let current = Object.keys(plyerscore)[currentindex]
     if(isCorrect){
-        score+=100;
-        plyerscore[current]+=100
-document.getElementById(`score-${current}`).textContent=`النقاط:${plyerscore[current]}`
+        // score+=100;
+        plyerscore[playername]+=100
+
+        // plyerscore[current]+=100
+document.getElementById(`score-${playername}`).textContent=`النقاط:${plyerscore[playername]}`
 Swal.fire({
     title: "حركات صح عليك ",
     text: "كسبت 100 ",
     icon: "success"
   });
-// alert("good")
     }else{
         Swal.fire({
             title: "إجابة خاطئة",
@@ -111,30 +121,47 @@ Swal.fire({
 
 setTimeout(()=>{
     currentqu++;
-    if(currentqu < question.length){
-        nextQustion()
-    }else{
-        alert("finish")
-        localStorage.setItem('playersScores', JSON.stringify(plyerscore));
-        window.location.href="../winner/winnerpage.html"
-    }
+    nextQustion()
+
+    // if(currentqu < question.length){
+    //     nextQustion()
+    // }else{
+    //     alert("finish")
+    //     localStorage.setItem('playersScores', JSON.stringify(plyerscore));
+    //     window.location.href="../winner/winnerpage.html"
+    // }
    
 } , 1000)
-    }
+    // }
 }
 
 
 btn_1.addEventListener("click",()=>{
-    answerCorrect(question[currentqu].answer===0)
+    let player = Object.keys(plyerscore)
+    player.forEach(playername=>{
+    answerCorrect(question[currentqu].answer===0,playername)
+})
 })
 btn_2.addEventListener("click",()=>{
-    answerCorrect(question[currentqu].answer===1)
+    let player = Object.keys(plyerscore)
+    player.forEach(playername=>{
+    answerCorrect(question[currentqu].answer===1,playername)
+})
+
 })
 btn_3.addEventListener("click",()=>{
-    answerCorrect(question[currentqu].answer===2)
+    let player = Object.keys(plyerscore)
+    player.forEach(playername=>{
+    answerCorrect(question[currentqu].answer===2 ,playername)
+})
+
 })
 btn_4.addEventListener("click",()=>{
-    answerCorrect(question[currentqu].answer===3)
+    let player = Object.keys(plyerscore)
+    player.forEach(playername=>{
+    answerCorrect(question[currentqu].answer===3,playername)
+})
+
 })
 
 nextQustion()
