@@ -20,7 +20,9 @@ form_id.addEventListener("submit", e=>{
 fetch(url,{
     method:'POST',
     body:JSON.stringify({
-        name:fname.value
+        name:fname.value,
+        score:0
+     
     }),
     headers:{
         'Content-type': 'application/json; charset=UTF-8',

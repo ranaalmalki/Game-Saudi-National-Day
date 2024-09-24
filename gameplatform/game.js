@@ -2,23 +2,23 @@
 let players_name_score = document.getElementById("players-name-score")
 // liplayer.setAttribute("class","nav-item")
 let namee=document.getElementById("show-name")
-
+let plyerscore={}
+let currentPlayerName = "";
 // let username =JSON.parse(localStorage.getItem('players')) || []
 let username = fetch("https://66e7e69bb17821a9d9da6eb2.mockapi.io/login")
 .then(res=>res.json())
 .then(plyers=>{
 console.log(plyers);
 
-let plyerscore={}
 plyers.forEach(element => {
+    plyerscore[element.name]=0;
     console.log(element.name);
     let divplayer=document.createElement("div")
     divplayer.setAttribute("class","divplyer")
     let playername = document.createElement("h3")
     playername.textContent=element.name
-    plyerscore[element]=0;
     let scoreplayer= document.createElement("h6")
-    scoreplayer.setAttribute("id", `score-${element.name}`); // تعيين معرف فريد للنقاط
+    scoreplayer.setAttribute("id", `score-${element.name}`);
     scoreplayer.textContent=`${plyerscore[element.name]}النقاط:`
 // ullist.appendChild(liplayer)
 players_name_score.appendChild(divplayer)
@@ -27,6 +27,9 @@ divplayer.appendChild(scoreplayer)
 
 });
 // namee.textContent=username
+// nextQustion()
+currentPlayerName=plyers[0].name
+updateScores()
 })
 
 
@@ -74,9 +77,10 @@ let question =[
 },
    ]
    
-
 let currentqu = 0;
 function nextQustion(){
+    console.log(currentqu);
+    
     if(currentqu <question.length){
     let currentqution = question[currentqu];
     question_1.textContent=currentqution.qus
@@ -91,77 +95,105 @@ function nextQustion(){
         window.location.href="../winner/winnerpage.html"
 }
 }
+function updateScores() {
+    fetch("https://66e7e69bb17821a9d9da6eb2.mockapi.io/login")
+        .then(res => res.json())
+        .then(players => {
+            players.forEach(player => {
+                plyerscore[player.name] = player.score || 0; 
 
-let score = 0;
+                let scoreelmetn =document.getElementById(`score-${player.name}`)
+                if(scoreelmetn){
+                    scoreelmetn.textContent = `النقاط: ${plyerscore[player.name]}`
+                }
+
+            });
+        });
+}
+
+function updateScoresplyer(playername){
+    fetch("https://66e7e69bb17821a9d9da6eb2.mockapi.io/login")
+    .then(res =>res.json())
+    .then(players=>{
+        let plyer = players.find(p=> p.name === playername)
+        if(plyer){
+            fetch(`https://66e7e69bb17821a9d9da6eb2.mockapi.io/login/${plyer.id}`, {
+                method:'PUT',
+                headers:{
+                    'Content-Type': 'application/json',
+
+                },
+                body:JSON.stringify({score:plyerscore[playername]}),
+
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+updateScores()
+                
+            })
+
+        }
+    })
+}
+   let answerd= false;
+
+// let score = 0;
 let currentindex=0
-let answerd= false;
+let players = Object.keys(plyerscore);
+
 function answerCorrect(isCorrect,playername){
-    // if(!answerd){
-        // answerd=true
-        // let current = Object.keys(plyerscore)[currentindex]
+    if(!answerd){
+        answerd=true
     if(isCorrect){
-        // score+=100;
         plyerscore[playername]+=100
+        
+        let scoreelmetn =document.getElementById(`score-${playername}`)
+        if(scoreelmetn){
+            scoreelmetn.textContent = `النقاط: ${plyerscore[playername]}`
+        }
 
         // plyerscore[current]+=100
-document.getElementById(`score-${playername}`).textContent=`النقاط:${plyerscore[playername]}`
-Swal.fire({
-    title: "حركات صح عليك ",
-    text: "كسبت 100 ",
-    icon: "success"
-  });
-    }else{
-        Swal.fire({
-            title: "إجابة خاطئة",
-            text: "راحت عليك ",
-            icon: "error"
-          });
+// document.getElementById(`score-${playername}`).textContent=`النقاط:${plyerscore[playername]}`
+updateScoresplyer(playername)
     }
+// });
+Swal.fire({
+    title: isCorrect ? "حركات صح عليك" : "إجابة خاطئة",
+    text: isCorrect ? "كسبت 100" : "راحت عليك",
+    icon: isCorrect ? "success" : "error"
+});
 
 
 setTimeout(()=>{
     currentqu++;
     nextQustion()
-
-    // if(currentqu < question.length){
-    //     nextQustion()
-    // }else{
-    //     alert("finish")
-    //     localStorage.setItem('playersScores', JSON.stringify(plyerscore));
-    //     window.location.href="../winner/winnerpage.html"
-    // }
+    answerd = false;
+  
    
 } , 1000)
-    // }
+    }
 }
 
 
+
 btn_1.addEventListener("click",()=>{
-    let player = Object.keys(plyerscore)
-    player.forEach(playername=>{
-    answerCorrect(question[currentqu].answer===0,playername)
+    answerCorrect(question[currentqu].answer===0,currentPlayerName)
 })
-})
+
 btn_2.addEventListener("click",()=>{
-    let player = Object.keys(plyerscore)
-    player.forEach(playername=>{
-    answerCorrect(question[currentqu].answer===1,playername)
+    
+    answerCorrect(question[currentqu].answer===1,currentPlayerName)
 })
 
-})
 btn_3.addEventListener("click",()=>{
-    let player = Object.keys(plyerscore)
-    player.forEach(playername=>{
-    answerCorrect(question[currentqu].answer===2 ,playername)
+ 
+    answerCorrect(question[currentqu].answer===2,currentPlayerName)
 })
 
-})
 btn_4.addEventListener("click",()=>{
-    let player = Object.keys(plyerscore)
-    player.forEach(playername=>{
-    answerCorrect(question[currentqu].answer===3,playername)
-})
-
+   
+    answerCorrect(question[currentqu].answer===3,currentPlayerName)
 })
 
 nextQustion()
